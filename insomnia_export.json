@@ -1,0 +1,998 @@
+{
+  "_type": "export",
+  "__export_format": 4,
+  "__export_date": "2023-05-15T12:00:00.000Z",
+  "__export_source": "insomnia.desktop.app:v2023.1.0",
+  "resources": [
+    {
+      "_id": "req_root",
+      "parentId": "wrk_family_finance",
+      "modified": 1684152000000,
+      "created": 1684152000000,
+      "url": "{{ _.baseUrl }}/",
+      "name": "Root",
+      "description": "",
+      "method": "GET",
+      "body": {},
+      "parameters": [],
+      "headers": [],
+      "authentication": {},
+      "metaSortKey": -1684152000000,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "wrk_family_finance",
+      "parentId": null,
+      "modified": 1684152000000,
+      "created": 1684152000000,
+      "name": "Family Finance Manager",
+      "description": "",
+      "scope": "collection",
+      "_type": "workspace"
+    },
+    {
+      "_id": "env_base",
+      "parentId": "wrk_family_finance",
+      "modified": 1684152000000,
+      "created": 1684152000000,
+      "name": "Base Environment",
+      "data": {
+        "baseUrl": "http://localhost:8000"
+      },
+      "dataPropertyOrder": {
+        "&": ["baseUrl"]
+      },
+      "color": null,
+      "isPrivate": false,
+      "metaSortKey": 1684152000000,
+      "_type": "environment"
+    },
+    {
+      "_id": "fld_auth",
+      "parentId": "wrk_family_finance",
+      "modified": 1684152000000,
+      "created": 1684152000000,
+      "name": "Authentication",
+      "description": "",
+      "environment": {},
+      "environmentPropertyOrder": null,
+      "metaSortKey": -1684152000000,
+      "_type": "request_group"
+    },
+    {
+      "_id": "req_login",
+      "parentId": "fld_auth",
+      "modified": 1684152000000,
+      "created": 1684152000000,
+      "url": "{{ _.baseUrl }}/api/auth/login",
+      "name": "Login",
+      "description": "",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n\t\"email\": \"joao.silva@example.com\",\n\t\"password\": \"password\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1684152000000,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "fld_users",
+      "parentId": "wrk_family_finance",
+      "modified": 1684152000000,
+      "created": 1684152000000,
+      "name": "Users",
+      "description": "",
+      "environment": {},
+      "environmentPropertyOrder": null,
+      "metaSortKey": -1684151000000,
+      "_type": "request_group"
+    },
+    {
+      "_id": "req_get_current_user",
+      "parentId": "fld_users",
+      "modified": 1684152000000,
+      "created": 1684152000000,
+      "url": "{{ _.baseUrl }}/api/users/me",
+      "name": "Get Current User",
+      "description": "",
+      "method": "GET",
+      "body": {},
+      "parameters": [],
+      "headers": [],
+      "authentication": {
+        "type": "bearer",
+        "token": "{% response 'body', 'req_login', 'b64::JC5hY2Nlc3NfdG9rZW4=::46b', 'never', 60 %}"
+      },
+      "metaSortKey": -1684152000000,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_update_current_user",
+      "parentId": "fld_users",
+      "modified": 1684152000000,
+      "created": 1684152000000,
+      "url": "{{ _.baseUrl }}/api/users/me",
+      "name": "Update Current User",
+      "description": "",
+      "method": "PUT",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n\t\"full_name\": \"João Silva Updated\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {
+        "type": "bearer",
+        "token": "{% response 'body', 'req_login', 'b64::JC5hY2Nlc3NfdG9rZW4=::46b', 'never', 60 %}"
+      },
+      "metaSortKey": -1684151900000,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_get_family_members",
+      "parentId": "fld_users",
+      "modified": 1684152000000,
+      "created": 1684152000000,
+      "url": "{{ _.baseUrl }}/api/users/family",
+      "name": "Get Family Members",
+      "description": "",
+      "method": "GET",
+      "body": {},
+      "parameters": [],
+      "headers": [],
+      "authentication": {
+        "type": "bearer",
+        "token": "{% response 'body', 'req_login', 'b64::JC5hY2Nlc3NfdG9rZW4=::46b', 'never', 60 %}"
+      },
+      "metaSortKey": -1684151800000,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_create_user",
+      "parentId": "fld_users",
+      "modified": 1684152000000,
+      "created": 1684152000000,
+      "url": "{{ _.baseUrl }}/api/users/",
+      "name": "Create User",
+      "description": "",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n\t\"email\": \"novo.membro@example.com\",\n\t\"password\": \"password\",\n\t\"full_name\": \"Novo Membro\",\n\t\"is_active\": true\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {
+        "type": "bearer",
+        "token": "{% response 'body', 'req_login', 'b64::JC5hY2Nlc3NfdG9rZW4=::46b', 'never', 60 %}"
+      },
+      "metaSortKey": -1684151700000,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_get_user_by_id",
+      "parentId": "fld_users",
+      "modified": 1684152000000,
+      "created": 1684152000000,
+      "url": "{{ _.baseUrl }}/api/users/2",
+      "name": "Get User by ID",
+      "description": "",
+      "method": "GET",
+      "body": {},
+      "parameters": [],
+      "headers": [],
+      "authentication": {
+        "type": "bearer",
+        "token": "{% response 'body', 'req_login', 'b64::JC5hY2Nlc3NfdG9rZW4=::46b', 'never', 60 %}"
+      },
+      "metaSortKey": -1684151600000,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "fld_transactions",
+      "parentId": "wrk_family_finance",
+      "modified": 1684152000000,
+      "created": 1684152000000,
+      "name": "Transactions",
+      "description": "",
+      "environment": {},
+      "environmentPropertyOrder": null,
+      "metaSortKey": -1684150000000,
+      "_type": "request_group"
+    },
+    {
+      "_id": "req_create_transaction",
+      "parentId": "fld_transactions",
+      "modified": 1684152000000,
+      "created": 1684152000000,
+      "url": "{{ _.baseUrl }}/api/transactions/",
+      "name": "Create Transaction",
+      "description": "",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n\t\"amount\": 100.50,\n\t\"description\": \"Compras no supermercado\",\n\t\"type\": \"expense\",\n\t\"category\": \"food\",\n\t\"date\": \"{% now 'iso-8601', '' %}\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {
+        "type": "bearer",
+        "token": "{% response 'body', 'req_login', 'b64::JC5hY2Nlc3NfdG9rZW4=::46b', 'never', 60 %}"
+      },
+      "metaSortKey": -1684152000000,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_create_income",
+      "parentId": "fld_transactions",
+      "modified": 1684152000000,
+      "created": 1684152000000,
+      "url": "{{ _.baseUrl }}/api/transactions/",
+      "name": "Create Income",
+      "description": "",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n\t\"amount\": 1000.00,\n\t\"description\": \"Salário\",\n\t\"type\": \"income\",\n\t\"category\": \"salary\",\n\t\"date\": \"{% now 'iso-8601', '' %}\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {
+        "type": "bearer",
+        "token": "{% response 'body', 'req_login', 'b64::JC5hY2Nlc3NfdG9rZW4=::46b', 'never', 60 %}"
+      },
+      "metaSortKey": -1684151900000,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_get_transactions",
+      "parentId": "fld_transactions",
+      "modified": 1684152000000,
+      "created": 1684152000000,
+      "url": "{{ _.baseUrl }}/api/transactions/",
+      "name": "Get Transactions",
+      "description": "",
+      "method": "GET",
+      "body": {},
+      "parameters": [
+        {
+          "name": "skip",
+          "value": "0",
+          "disabled": true
+        },
+        {
+          "name": "limit",
+          "value": "100",
+          "disabled": true
+        },
+        {
+          "name": "start_date",
+          "value": "{% now 'iso-8601', '-30d' %}",
+          "disabled": true
+        },
+        {
+          "name": "end_date",
+          "value": "{% now 'iso-8601', '' %}",
+          "disabled": true
+        },
+        {
+          "name": "transaction_type",
+          "value": "expense",
+          "disabled": true
+        },
+        {
+          "name": "category",
+          "value": "food",
+          "disabled": true
+        }
+      ],
+      "headers": [],
+      "authentication": {
+        "type": "bearer",
+        "token": "{% response 'body', 'req_login', 'b64::JC5hY2Nlc3NfdG9rZW4=::46b', 'never', 60 %}"
+      },
+      "metaSortKey": -1684151800000,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_get_transaction",
+      "parentId": "fld_transactions",
+      "modified": 1684152000000,
+      "created": 1684152000000,
+      "url": "{{ _.baseUrl }}/api/transactions/1",
+      "name": "Get Transaction by ID",
+      "description": "",
+      "method": "GET",
+      "body": {},
+      "parameters": [],
+      "headers": [],
+      "authentication": {
+        "type": "bearer",
+        "token": "{% response 'body', 'req_login', 'b64::JC5hY2Nlc3NfdG9rZW4=::46b', 'never', 60 %}"
+      },
+      "metaSortKey": -1684151700000,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_update_transaction",
+      "parentId": "fld_transactions",
+      "modified": 1684152000000,
+      "created": 1684152000000,
+      "url": "{{ _.baseUrl }}/api/transactions/1",
+      "name": "Update Transaction",
+      "description": "",
+      "method": "PUT",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n\t\"amount\": 120.75,\n\t\"description\": \"Compras no supermercado atualizado\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {
+        "type": "bearer",
+        "token": "{% response 'body', 'req_login', 'b64::JC5hY2Nlc3NfdG9rZW4=::46b', 'never', 60 %}"
+      },
+      "metaSortKey": -1684151600000,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_delete_transaction",
+      "parentId": "fld_transactions",
+      "modified": 1684152000000,
+      "created": 1684152000000,
+      "url": "{{ _.baseUrl }}/api/transactions/1",
+      "name": "Delete Transaction",
+      "description": "",
+      "method": "DELETE",
+      "body": {},
+      "parameters": [],
+      "headers": [],
+      "authentication": {
+        "type": "bearer",
+        "token": "{% response 'body', 'req_login', 'b64::JC5hY2Nlc3NfdG9rZW4=::46b', 'never', 60 %}"
+      },
+      "metaSortKey": -1684151500000,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "fld_goals",
+      "parentId": "wrk_family_finance",
+      "modified": 1684152000000,
+      "created": 1684152000000,
+      "name": "Goals",
+      "description": "",
+      "environment": {},
+      "environmentPropertyOrder": null,
+      "metaSortKey": -1684149000000,
+      "_type": "request_group"
+    },
+    {
+      "_id": "req_create_goal",
+      "parentId": "fld_goals",
+      "modified": 1684152000000,
+      "created": 1684152000000,
+      "url": "{{ _.baseUrl }}/api/goals/",
+      "name": "Create Goal",
+      "description": "",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n\t\"title\": \"Viagem para o Nordeste\",\n\t\"description\": \"Férias em família no Nordeste\",\n\t\"target_amount\": 4000.00,\n\t\"deadline\": \"{% now 'iso-8601', '+180d' %}\",\n\t\"participant_ids\": [1, 2, 3]\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {
+        "type": "bearer",
+        "token": "{% response 'body', 'req_login', 'b64::JC5hY2Nlc3NfdG9rZW4=::46b', 'never', 60 %}"
+      },
+      "metaSortKey": -1684152000000,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_get_goals",
+      "parentId": "fld_goals",
+      "modified": 1684152000000,
+      "created": 1684152000000,
+      "url": "{{ _.baseUrl }}/api/goals/",
+      "name": "Get Goals",
+      "description": "",
+      "method": "GET",
+      "body": {},
+      "parameters": [],
+      "headers": [],
+      "authentication": {
+        "type": "bearer",
+        "token": "{% response 'body', 'req_login', 'b64::JC5hY2Nlc3NfdG9rZW4=::46b', 'never', 60 %}"
+      },
+      "metaSortKey": -1684151900000,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_get_goal",
+      "parentId": "fld_goals",
+      "modified": 1684152000000,
+      "created": 1684152000000,
+      "url": "{{ _.baseUrl }}/api/goals/1",
+      "name": "Get Goal by ID",
+      "description": "",
+      "method": "GET",
+      "body": {},
+      "parameters": [],
+      "headers": [],
+      "authentication": {
+        "type": "bearer",
+        "token": "{% response 'body', 'req_login', 'b64::JC5hY2Nlc3NfdG9rZW4=::46b', 'never', 60 %}"
+      },
+      "metaSortKey": -1684151800000,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_update_goal",
+      "parentId": "fld_goals",
+      "modified": 1684152000000,
+      "created": 1684152000000,
+      "url": "{{ _.baseUrl }}/api/goals/1",
+      "name": "Update Goal",
+      "description": "",
+      "method": "PUT",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n\t\"title\": \"Viagem para o Nordeste Atualizado\",\n\t\"target_amount\": 4500.00,\n\t\"participant_ids\": [1, 2, 3]\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {
+        "type": "bearer",
+        "token": "{% response 'body', 'req_login', 'b64::JC5hY2Nlc3NfdG9rZW4=::46b', 'never', 60 %}"
+      },
+      "metaSortKey": -1684151700000,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_contribute_to_goal",
+      "parentId": "fld_goals",
+      "modified": 1684152000000,
+      "created": 1684152000000,
+      "url": "{{ _.baseUrl }}/api/goals/1/contribute",
+      "name": "Contribute to Goal",
+      "description": "",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n\t\"amount\": 500.00\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {
+        "type": "bearer",
+        "token": "{% response 'body', 'req_login', 'b64::JC5hY2Nlc3NfdG9rZW4=::46b', 'never', 60 %}"
+      },
+      "metaSortKey": -1684151600000,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "fld_reports",
+      "parentId": "wrk_family_finance",
+      "modified": 1684152000000,
+      "created": 1684152000000,
+      "name": "Reports",
+      "description": "",
+      "environment": {},
+      "environmentPropertyOrder": null,
+      "metaSortKey": -1684148000000,
+      "_type": "request_group"
+    },
+    {
+      "_id": "req_generate_report",
+      "parentId": "fld_reports",
+      "modified": 1684152000000,
+      "created": 1684152000000,
+      "url": "{{ _.baseUrl }}/api/reports/generate",
+      "name": "Generate Report",
+      "description": "",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n\t\"start_date\": \"{% now 'iso-8601', '-30d' %}\",\n\t\"end_date\": \"{% now 'iso-8601', '' %}\",\n\t\"period\": \"daily\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {
+        "type": "bearer",
+        "token": "{% response 'body', 'req_login', 'b64::JC5hY2Nlc3NfdG9rZW4=::46b', 'never', 60 %}"
+      },
+      "metaSortKey": -1684152000000,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_category_report",
+      "parentId": "fld_reports",
+      "modified": 1684152000000,
+      "created": 1684152000000,
+      "url": "{{ _.baseUrl }}/api/reports/categories",
+      "name": "Category Report",
+      "description": "",
+      "method": "GET",
+      "body": {},
+      "parameters": [
+        {
+          "name": "start_date",
+          "value": "{% now 'iso-8601', '-30d' %}"
+        },
+        {
+          "name": "end_date",
+          "value": "{% now 'iso-8601', '' %}"
+        }
+      ],
+      "headers": [],
+      "authentication": {
+        "type": "bearer",
+        "token": "{% response 'body', 'req_login', 'b64::JC5hY2Nlc3NfdG9rZW4=::46b', 'never', 60 %}"
+      },
+      "metaSortKey": -1684151900000,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_top_expenses",
+      "parentId": "fld_reports",
+      "modified": 1684152000000,
+      "created": 1684152000000,
+      "url": "{{ _.baseUrl }}/api/reports/top-expenses",
+      "name": "Top Expenses",
+      "description": "",
+      "method": "GET",
+      "body": {},
+      "parameters": [
+        {
+          "name": "start_date",
+          "value": "{% now 'iso-8601', '-30d' %}"
+        },
+        {
+          "name": "end_date",
+          "value": "{% now 'iso-8601', '' %}"
+        },
+        {
+          "name": "limit",
+          "value": "5"
+        }
+      ],
+      "headers": [],
+      "authentication": {
+        "type": "bearer",
+        "token": "{% response 'body', 'req_login', 'b64::JC5hY2Nlc3NfdG9rZW4=::46b', 'never', 60 %}"
+      },
+      "metaSortKey": -1684151800000,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_goals_report",
+      "parentId": "fld_reports",
+      "modified": 1684152000000,
+      "created": 1684152000000,
+      "url": "{{ _.baseUrl }}/api/reports/goals",
+      "name": "Goals Report",
+      "description": "",
+      "method": "GET",
+      "body": {},
+      "parameters": [],
+      "headers": [],
+      "authentication": {
+        "type": "bearer",
+        "token": "{% response 'body', 'req_login', 'b64::JC5hY2Nlc3NfdG9rZW4=::46b', 'never', 60 %}"
+      },
+      "metaSortKey": -1684151700000,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_spending_trends",
+      "parentId": "fld_reports",
+      "modified": 1684152000000,
+      "created": 1684152000000,
+      "url": "{{ _.baseUrl }}/api/reports/spending-trends",
+      "name": "Spending Trends",
+      "description": "",
+      "method": "GET",
+      "body": {},
+      "parameters": [
+        {
+          "name": "months",
+          "value": "6"
+        }
+      ],
+      "headers": [],
+      "authentication": {
+        "type": "bearer",
+        "token": "{% response 'body', 'req_login', 'b64::JC5hY2Nlc3NfdG9rZW4=::46b', 'never', 60 %}"
+      },
+      "metaSortKey": -1684151600000,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_monthly_summary",
+      "parentId": "fld_reports",
+      "modified": 1684152000000,
+      "created": 1684152000000,
+      "url": "{{ _.baseUrl }}/api/reports/monthly-summary",
+      "name": "Monthly Summary",
+      "description": "",
+      "method": "GET",
+      "body": {},
+      "parameters": [
+        {
+          "name": "year",
+          "value": "{% now 'YYYY' %}"
+        },
+        {
+          "name": "month",
+          "value": "{% now 'M' %}"
+        }
+      ],
+      "headers": [],
+      "authentication": {
+        "type": "bearer",
+        "token": "{% response 'body', 'req_login', 'b64::JC5hY2Nlc3NfdG9rZW4=::46b', 'never', 60 %}"
+      },
+      "metaSortKey": -1684151500000,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "fld_notifications",
+      "parentId": "wrk_family_finance",
+      "modified": 1684152000000,
+      "created": 1684152000000,
+      "name": "Notifications",
+      "description": "",
+      "environment": {},
+      "environmentPropertyOrder": null,
+      "metaSortKey": -1684147000000,
+      "_type": "request_group"
+    },
+    {
+      "_id": "req_get_notifications",
+      "parentId": "fld_notifications",
+      "modified": 1684152000000,
+      "created": 1684152000000,
+      "url": "{{ _.baseUrl }}/api/notifications/",
+      "name": "Get Notifications",
+      "description": "",
+      "method": "GET",
+      "body": {},
+      "parameters": [
+        {
+          "name": "unread_only",
+          "value": "false",
+          "disabled": true
+        }
+      ],
+      "headers": [],
+      "authentication": {
+        "type": "bearer",
+        "token": "{% response 'body', 'req_login', 'b64::JC5hY2Nlc3NfdG9rZW4=::46b', 'never', 60 %}"
+      },
+      "metaSortKey": -1684152000000,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_create_notification",
+      "parentId": "fld_notifications",
+      "modified": 1684152000000,
+      "created": 1684152000000,
+      "url": "{{ _.baseUrl }}/api/notifications/",
+      "name": "Create Notification",
+      "description": "",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n\t\"title\": \"Lembrete\",\n\t\"message\": \"Não esqueça de pagar a conta de luz!\",\n\t\"type\": \"manual\",\n\t\"user_id\": 2\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {
+        "type": "bearer",
+        "token": "{% response 'body', 'req_login', 'b64::JC5hY2Nlc3NfdG9rZW4=::46b', 'never', 60 %}"
+      },
+      "metaSortKey": -1684151900000,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_mark_notification_as_read",
+      "parentId": "fld_notifications",
+      "modified": 1684152000000,
+      "created": 1684152000000,
+      "url": "{{ _.baseUrl }}/api/notifications/1",
+      "name": "Mark Notification as Read",
+      "description": "",
+      "method": "PUT",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n\t\"is_read\": true\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {
+        "type": "bearer",
+        "token": "{% response 'body', 'req_login', 'b64::JC5hY2Nlc3NfdG9rZW4=::46b', 'never', 60 %}"
+      },
+      "metaSortKey": -1684151800000,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_delete_notification",
+      "parentId": "fld_notifications",
+      "modified": 1684152000000,
+      "created": 1684152000000,
+      "url": "{{ _.baseUrl }}/api/notifications/1",
+      "name": "Delete Notification",
+      "description": "",
+      "method": "DELETE",
+      "body": {},
+      "parameters": [],
+      "headers": [],
+      "authentication": {
+        "type": "bearer",
+        "token": "{% response 'body', 'req_login', 'b64::JC5hY2Nlc3NfdG9rZW4=::46b', 'never', 60 %}"
+      },
+      "metaSortKey": -1684151700000,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    }
+  ]
+}
